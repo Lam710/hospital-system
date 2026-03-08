@@ -18,14 +18,23 @@ def get_db():
 
 # ---------- LOGIN REQUIRED ----------
 
-def login_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        if "user" not in session:
-            return redirect("/login")
-        return f(*args, **kwargs)
-    return decorated
+@app.route("/login", methods=["GET", "POST"])
+def login():
 
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        stored_password = "scrypt:32768:8:1$dt6ryeylR1Rgeyni$0e7391bec9ac4857fffc7f33660a573d54b80b8e08690f39977a71f53a1acb344b549f1d45a6bd8ac1a97b81db88bdb66801805351acb05ebb9d53edac03ee27"
+
+        if username == "admin" and check_password_hash(stored_password, password):
+            session["user"] = username
+            return redirect("/")
+
+        else:
+            return "Wrong username or password"
+
+    return render_template("login.html")
 
 # ---------- LOGIN ----------
 
@@ -253,4 +262,5 @@ def activate(id):
 # ---------- RUN ----------
 
 if __name__ == "__main__":
+
     app.run()
