@@ -28,8 +28,6 @@ def login_required(f):
 
 
 # ---------- LOGIN ----------
-from flask import request, redirect, render_template, session
-from werkzeug.security import check_password_hash
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -43,11 +41,11 @@ def login():
         if username == "admin" and check_password_hash(stored_password, password):
             session["user"] = username
             return redirect("/")
-
         else:
             return render_template("login.html", error="Wrong username or password")
 
     return render_template("login.html")
+
 
 # ---------- LOGOUT ----------
 
@@ -148,8 +146,9 @@ def add_patient():
         return redirect("/")
 
     return render_template("add.html")
-    
-    # ---------- IMPORT FROM EXCEL ----------
+
+
+# ---------- IMPORT FROM EXCEL ----------
 
 @app.route("/import", methods=["GET","POST"])
 @login_required
@@ -160,13 +159,10 @@ def import_excel():
         file = request.files["file"]
 
         if file:
-
             df = pd.read_excel(file)
-
             db = get_db()
 
             for _, row in df.iterrows():
-
                 mrn = str(row["MRN"])
                 name = str(row["Name"])
                 background = str(row["Background"])
@@ -178,7 +174,6 @@ def import_excel():
                 """,(mrn,name,background,admission,"active"))
 
             db.commit()
-
             return redirect("/patients")
 
     return render_template("import.html")
@@ -249,9 +244,3 @@ def activate(id):
     db.commit()
 
     return redirect("/archive")
-
-
-# ---------- RUN ----------
-
-if __name__ == "__main__":
-    app.run()
