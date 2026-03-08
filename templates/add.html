@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Add Patient</h2>
+
+<form method="POST">
+
+MRN<br>
+<input type="text" name="mrn"><br><br>
+
+Patient Name<br>
+<input type="text" name="name"><br><br>
+
+Background<br>
+<input type="text" name="background"><br><br>
+
+Admission Date<br>
+<input type="date" name="admission"><br><br>
+
+<button type="submit">Save</button>
+
+</form>
+
+{% endblock %}

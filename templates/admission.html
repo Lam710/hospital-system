@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Admission List</h2>
+
+<table>
+
+<tr>
+<th>MRN</th>
+<th>Patient Name</th>
+<th>Background</th>
+<th>Admission</th>
+<th>Status</th>
+</tr>
+
+{% for p in patients %}
+
+<tr>
+
+<td>{{p.mrn}}</td>
+<td>{{p.name}}</td>
+<td>{{p.background}}</td>
+<td>{{p.admission}}</td>
+
+<td>
+
+<span style="color:green;font-weight:bold">Active</span>
+
+<a href="/discharge/{{p.id}}">
+<button class="dc">Discharge</button>
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

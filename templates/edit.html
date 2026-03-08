@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Edit Patient</h2>
+
+<form method="POST">
+
+<label>MRN</label><br>
+<input name="mrn" value="{{patient.mrn}}"><br><br>
+
+<label>Name</label><br>
+<input name="name" value="{{patient.name}}"><br><br>
+
+<label>Background</label><br>
+<input name="background" value="{{patient.background}}"><br><br>
+
+<label>Admission</label><br>
+<input type="date" name="admission" value="{{patient.admission}}"><br><br>
+
+<button type="submit">Save</button>
+
+</form>
+
+{% endblock %}

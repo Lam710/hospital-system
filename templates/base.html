@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Hospital System</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f5f6fa;
+margin:0;
+}
+
+.navbar{
+background:#2f3640;
+padding:15px;
+}
+
+.navbar a{
+color:white;
+margin-right:20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.container{
+padding:30px;
+}
+
+table{
+border-collapse:collapse;
+width:100%;
+background:white;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+th{
+background:#273c75;
+color:white;
+}
+
+tr:nth-child(even){
+background:#f2f2f2;
+}
+
+button{
+padding:6px 12px;
+background:#44bd32;
+border:none;
+color:white;
+border-radius:4px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<a href="/">Admission</a>
+<a href="/patients">Patient Database</a>
+<a href="/archive">Archive</a>
+
+<span style="float:right">
+<a href="/logout">
+<button style="
+padding:6px 12px;
+background:#e84118;
+border:none;
+color:white;
+border-radius:4px;
+cursor:pointer;
+">
+Logout
+</button>
+</a>
+</span>
+
+</div>
+<form method="GET" style="padding:20px">
+
+<input name="search" placeholder="Search MRN or Name">
+
+<button>Search</button>
+
+</form>
+
+<div class="container">
+
+{% block content %}
+
+{% endblock %}
+
+</div>
+
+</body>
+</html>
